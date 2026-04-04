@@ -17,6 +17,7 @@ type Project = {
   linkLabel?: string;
   github?: string;
   status?: string;
+  topBadge?: string;
   specialBadge?: string;
 };
 
@@ -68,7 +69,6 @@ const siteContent = {
       title: "社会課題にやさしく触れるAIプロジェクト",
       impactLabel: "Impact",
       githubLabel: "GitHub",
-      catFriendlyLabel: "Cat Friendly",
       items: [
         {
           title: "こえラボ",
@@ -204,6 +204,25 @@ const siteContent = {
           impactNote: "現場のAI活用ノウハウを継続発信",
         },
         {
+          title: "DateSuccess AI",
+          description:
+            "ハッカソンを起点に開発したAIコンシェルジュアプリ。店舗選びや会話準備の認知負荷をAIが肩代わりし、相手との時間に集中できる“余白”をつくるMVPとして設計。",
+          category: "Lifestyle AI / Hackathon MVP",
+          accent: "from-[#ffe8ef] to-[#efe7ff]",
+          tech: [
+            "React",
+            "Tailwind CSS",
+            "GAS",
+            "Gemini API",
+            "Hot Pepper API",
+            "Netlify",
+          ],
+          impact: "ハッカソン発のMVPを短期間で稼働",
+          impactNote: "低コストなサーバーレス構成で素早く検証",
+          topBadge: "Hackathon",
+          specialBadge: "ハッカソン発MVP",
+        },
+        {
           title: "介護学習サポート猫Bot",
           description:
             "友人の介護員養成講座の学習をサポートするために開発。厚生労働省の介護員養成講座テキスト（PDF）をRAG化し、LINEで話しかけると介護の知識を猫キャラクターがわかりやすく教えてくれるチャットボット。",
@@ -213,6 +232,7 @@ const siteContent = {
           impact: "自主学習を24時間サポート",
           impactNote: "公式テキストベースのRAGで回答の信頼性を担保",
           status: "個人開発・運用中",
+          topBadge: "Cat Friendly",
           specialBadge: "猫キャラでやさしく解説",
         },
       ] satisfies Project[],
@@ -329,7 +349,6 @@ const siteContent = {
       title: "AI projects shaped around real-world problems",
       impactLabel: "Impact",
       githubLabel: "GitHub",
-      catFriendlyLabel: "Cat Friendly",
       items: [
         {
           title: "Koe Lab",
@@ -465,6 +484,25 @@ const siteContent = {
           impactNote: "Continuously sharing practical AI usage know-how",
         },
         {
+          title: "DateSuccess AI",
+          description:
+            "An AI concierge app prototyped through a hackathon. It reduces the cognitive load of venue selection and conversation prep, creating more room for people to focus on the time they share together.",
+          category: "Lifestyle AI / Hackathon MVP",
+          accent: "from-[#ffe8ef] to-[#efe7ff]",
+          tech: [
+            "React",
+            "Tailwind CSS",
+            "GAS",
+            "Gemini API",
+            "Hot Pepper API",
+            "Netlify",
+          ],
+          impact: "A hackathon MVP brought into working form quickly",
+          impactNote: "Validated with a low-cost serverless architecture",
+          topBadge: "Hackathon",
+          specialBadge: "Built during a hackathon",
+        },
+        {
           title: "Care Study Support Cat Bot",
           description:
             "A chatbot built to support a friend's caregiver training studies. It turns the official caregiver training PDF text into a RAG system and explains caregiving knowledge through a cat character on LINE.",
@@ -474,6 +512,7 @@ const siteContent = {
           impact: "Supports self-study 24/7",
           impactNote: "Reliability backed by RAG over official learning materials",
           status: "Personal project / live",
+          topBadge: "Cat Friendly",
           specialBadge: "Gentle cat guide",
         },
       ] satisfies Project[],
@@ -762,9 +801,9 @@ export default function Home() {
                   <div
                     className={`relative h-28 rounded-[1.5rem] bg-gradient-to-br ${project.accent}`}
                   >
-                    {project.specialBadge ? (
+                    {project.topBadge ? (
                       <div className="absolute right-3 top-3 max-w-[calc(100%-1.5rem)] rounded-full bg-white/80 px-3 py-1 text-[10px] font-medium text-[#b86f94] backdrop-blur sm:right-4 sm:top-4 sm:text-xs">
-                        {content.projects.catFriendlyLabel}
+                        {project.topBadge}
                       </div>
                     ) : null}
                   </div>
