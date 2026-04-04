@@ -630,7 +630,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main id="top" className="overflow-x-clip">
+      <main id="top">
         <section className="relative isolate">
           <div className="absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(circle_at_top_left,_rgba(229,216,255,0.6),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(214,248,236,0.55),_transparent_32%),radial-gradient(circle_at_bottom,_rgba(255,227,214,0.65),_transparent_34%)]" />
           <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 sm:gap-10 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
@@ -741,19 +741,19 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="grid w-full grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
               {content.projects.items.map((project, index) => (
                 <motion.article
                   key={project.title}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={false}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.01 }}
                   transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
                   whileHover={{
                     y: -10,
                     boxShadow: "0 24px 70px rgba(148, 163, 184, 0.18)",
                   }}
-                  className={`group w-full max-w-full rounded-[2rem] border bg-white p-5 shadow-[0_14px_45px_rgba(148,163,184,0.12)] sm:p-6 ${
+                  className={`group block w-full max-w-full min-h-[26rem] rounded-[2rem] border bg-white p-5 shadow-[0_14px_45px_rgba(148,163,184,0.12)] sm:min-h-[28rem] sm:p-6 ${
                     project.specialBadge
                       ? "border-[#f2d9ea] shadow-[0_18px_55px_rgba(236,181,210,0.18)]"
                       : "border-white"
@@ -768,7 +768,7 @@ export default function Home() {
                       </div>
                     ) : null}
                   </div>
-                  <div className="mt-5 w-full max-w-full sm:mt-6">
+                  <div className="mt-5 w-full max-w-full overflow-visible sm:mt-6">
                     <div className="flex w-full flex-wrap items-start gap-2">
                       <span className="inline-flex max-w-full whitespace-normal break-words rounded-full bg-slate-100 px-3 py-1 text-xs font-medium leading-5 text-slate-500">
                         {project.category}
@@ -808,7 +808,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+                  <div className="mt-6 flex w-full flex-col gap-3 overflow-visible sm:mt-8 sm:flex-row sm:flex-wrap">
                     {project.href ? (
                       <a
                         href={project.href}
