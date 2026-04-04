@@ -572,7 +572,7 @@ function FadeInSection({ children, className = "", id }: FadeInSectionProps) {
       variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.01 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
       {children}
