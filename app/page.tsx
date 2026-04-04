@@ -36,7 +36,7 @@ const siteContent = {
     catchphrase:
       "非エンジニアでも、AIを相棒にすれば\"構造\"から変えられる",
     intro:
-      "コネヒト株式会社で広告制作×生成AI推進の二足のわらじ。現場の\"めんどくさい\"を解消するツールを自作する毎日です。",
+      "国内IT企業で広告制作×生成AI推進の二足のわらじ。現場の\"めんどくさい\"を解消するツールを自作する毎日です。",
     ctaProjects: "Projectsを見る",
     ctaAbout: "Aboutを見る",
     heroCards: [
@@ -48,7 +48,7 @@ const siteContent = {
       eyebrow: "About",
       title: "データと人間のあいだに、使えるAI体験をつくる",
       paragraphs: [
-        "コネヒト株式会社で、広告制作と生成AI推進を横断しながら働いています。広告記事制作、動画編集、ママリイベント開催、Instagram施策など、現場に近い仕事を担いながら、業務の中にAIを自然に組み込むことを実践しています。",
+        "国内IT企業で、広告制作と生成AI推進を横断しながら働いています。広告記事制作、動画編集、子育て領域のイベント運営、Instagram施策など、現場に近い仕事を担いながら、業務の中にAIを自然に組み込むことを実践しています。",
         "生成AI推進担当として、社内AI講座の企画・実施も担当。新入社員や中途社員にも伝わる形で、AIを「すごい技術」ではなく「明日から使える相棒」として届ける設計を続けています。",
         "放送大学でドゥルーズ哲学を学び、SF映画とオカルトをこよなく愛する視点から、複雑なものを構造として捉え直すのが得意です。現在は「データと人間をつなぐAI」の設計をテーマに、複数のプロダクトを開発中です。",
       ],
@@ -56,7 +56,7 @@ const siteContent = {
     profile: {
       eyebrow: "Profile",
       highlights: [
-        "コネヒト株式会社で広告制作と生成AI推進を横断",
+        "国内IT企業で広告制作と生成AI推進を横断",
         "現場の“めんどくさい”を解消するツールを日々自作",
         "ドゥルーズ哲学・SF映画・オカルトから発想を得る",
       ],
@@ -106,7 +106,7 @@ const siteContent = {
         {
           title: "営業支援ツール（競合PR自動収集）",
           description:
-            "競合PR・タイアップ情報を2週間ごとに自動収集し、ママリ向け提案たたき台をGeminiで自動生成。結果をSlackで営業チームへ通知。",
+            "競合PR・タイアップ情報を2週間ごとに自動収集し、子育て向けメディア向けの提案たたき台をGeminiで自動生成。結果をSlackで営業チームへ通知。",
           category: "Sales Automation / マーケティング",
           accent: "from-[#e9e2ff] to-[#ffe7da]",
           tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
@@ -297,7 +297,7 @@ const siteContent = {
     catchphrase:
       'Even without being an engineer, AI can help you change the structure itself.',
     intro:
-      'At Connehito, I work across content production and generative AI enablement, building tools that remove day-to-day friction from the field.',
+      'At a domestic IT company, I work across content production and generative AI enablement, building tools that remove day-to-day friction from the field.',
     ctaProjects: "View Projects",
     ctaAbout: "About Me",
     heroCards: [
@@ -309,7 +309,7 @@ const siteContent = {
       eyebrow: "About",
       title: "Designing practical AI experiences between data and people",
       paragraphs: [
-        "At Connehito, I work across content production and generative AI enablement. My day-to-day work includes advertorial planning, video editing, Mamari events, and Instagram initiatives, while also embedding AI naturally into real operational workflows.",
+        "At a domestic IT company, I work across content production and generative AI enablement. My day-to-day work includes advertorial planning, video editing, parenting-related events, and Instagram initiatives, while also embedding AI naturally into real operational workflows.",
         "As the person responsible for generative AI enablement, I also design and run internal AI workshops. I focus on making AI feel less like an intimidating technology and more like a practical partner people can use from the next day.",
         "I study Deleuzian philosophy at The Open University of Japan, and I draw inspiration from science fiction films and the occult. My current theme is designing AI that connects data and people through usable products.",
       ],
@@ -317,7 +317,7 @@ const siteContent = {
     profile: {
       eyebrow: "Profile",
       highlights: [
-        "Working across content production and generative AI enablement at Connehito",
+        "Working across content production and generative AI enablement at a domestic IT company",
         "Building small tools every day to remove operational friction",
         "Inspired by philosophy, science fiction, and the occult",
       ],
@@ -367,7 +367,7 @@ const siteContent = {
         {
           title: "Sales Assist Tool (Auto Competitor PR Scan)",
           description:
-            "Collects competitor PR and tie-up information every two weeks, generates proposal drafts for Mamari with Gemini, and sends the results to the sales team via Slack.",
+            "Collects competitor PR and tie-up information every two weeks, generates proposal drafts for a parenting-focused media business with Gemini, and sends the results to the sales team via Slack.",
           category: "Sales Automation / Marketing",
           accent: "from-[#e9e2ff] to-[#ffe7da]",
           tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
