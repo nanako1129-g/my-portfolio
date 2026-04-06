@@ -34,7 +34,7 @@ const siteContent = {
   ja: {
     heroBadge: "Pastel AI Portfolio",
     name: "宮坂めい奈",
-    role: "生成AI推進担当 / AIプロダクトクリエイター",
+    role: "生成AI推進 / プロダクト開発",
     catchphrase:
       "非エンジニアでも、AIを相棒にすれば\"構造\"から変えられる",
     intro:
