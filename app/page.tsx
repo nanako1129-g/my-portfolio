@@ -629,10 +629,10 @@ export default function Home() {
     <div className="min-h-screen bg-white text-slate-700">
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed bottom-6 left-0 z-40 sm:bottom-8"
-        initial={{ x: "-15vw", opacity: 0 }}
-        animate={{ x: "110vw", opacity: [0, 1, 1, 0] }}
-        transition={{ duration: 4.2, ease: "linear", times: [0, 0.08, 0.92, 1] }}
+        className="pointer-events-none fixed bottom-6 right-0 z-40 sm:bottom-8"
+        initial={{ x: "15vw", opacity: 0 }}
+        animate={{ x: "-110vw", opacity: [0, 1, 1, 0] }}
+        transition={{ duration: 6.8, ease: "linear", times: [0, 0.08, 0.92, 1] }}
       >
         <motion.span
           className="block text-4xl sm:text-5xl"
