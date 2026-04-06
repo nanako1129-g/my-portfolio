@@ -240,32 +240,6 @@ const siteContent = {
           impact: "非エンジニアでも1日で習得",
           impactNote: "GAS自動化の初学者研修として活用",
         },
-        {
-          title: "Genspark漫画化ツール活用提案",
-          reason:
-            "同僚から短編小説の漫画化をAIで効率化できないか検証した。外注比89〜95%コスト削減のROI付き提案書としてCTOに正式提案した。",
-          description:
-            "短編小説の漫画化をGensparkで効率化する提案。非エンジニアが2時間で外注レベル品質を達成し、CTOへのROI付き正式提案書として作成。",
-          category: "コンテンツ制作 / 業務効率化",
-          accent: "from-[#fff0df] to-[#dff8ee]",
-          tech: ["Genspark", "プロンプト設計"],
-          impact: "外注比89〜95%コスト削減",
-          impactNote: "作業時間を1/4に短縮",
-        },
-        {
-          title: "Noteブログ（AI活用シリーズ）",
-          reason:
-            "現場でのAI活用ノウハウを言語化して発信したくて始めた。非エンジニア視点でのリアルな試行錯誤を書いている。",
-          description:
-            "生成AI推進担当として、現場でのAI活用ノウハウや試行錯誤をNoteで発信。「やってみたいしかなかった私が、エンジニアやCTOと生成AI推進を続けてきた話」はスキ13件を獲得。",
-          category: "発信 / ナレッジシェア",
-          accent: "from-[#ece8ff] to-[#fff2ea]",
-          tech: ["Note", "AI活用発信"],
-          href: "https://note.com/mei_0209",
-          linkLabel: "Noteを見る",
-          impact: "スキ13件を獲得",
-          impactNote: "現場のAI活用ノウハウを継続発信",
-        },
       ] satisfies Project[],
     },
     skills: {
@@ -547,32 +521,6 @@ const siteContent = {
           tech: ["GAS", "Gemini", "ChatGPT"],
           impact: "Non-engineers could learn automation in one day",
           impactNote: "Used as a practical entry-level automation workshop",
-        },
-        {
-          title: "Genspark Manga Workflow Proposal",
-          reason:
-            "A coworker asked whether short-fiction manga adaptation could be made more efficient with AI. I tested it and turned the result into a formal ROI proposal for the CTO.",
-          description:
-            "A proposal for using Genspark to streamline manga adaptation from short fiction. A non-engineer achieved outsourcing-level quality in two hours and submitted a formal ROI proposal to the CTO.",
-          category: "Content Production / Operational Efficiency",
-          accent: "from-[#fff0df] to-[#dff8ee]",
-          tech: ["Genspark", "Prompt Design"],
-          impact: "Reduced outsourcing cost by 89-95%",
-          impactNote: "Cut production time down to one quarter",
-        },
-        {
-          title: "Note Blog (AI Use Series)",
-          reason:
-            "I started writing because I wanted to put practical AI know-how from the field into words. It documents real trial and error from a non-engineer perspective.",
-          description:
-            "I publish hands-on insights and trial-and-error stories from my role in generative AI enablement on Note. One featured article earned 13 likes.",
-          category: "Writing / Knowledge Sharing",
-          accent: "from-[#ece8ff] to-[#fff2ea]",
-          tech: ["Note", "AI Practice Writing"],
-          href: "https://note.com/mei_0209",
-          linkLabel: "Read on Note",
-          impact: "Featured article earned 13 likes",
-          impactNote: "Continuously sharing practical AI usage know-how",
         },
       ] satisfies Project[],
     },
