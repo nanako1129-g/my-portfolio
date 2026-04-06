@@ -7,6 +7,7 @@ type Locale = "ja" | "en";
 
 type Project = {
   title: string;
+  reason?: string;
   description: string;
   category: string;
   accent: string;
@@ -74,6 +75,8 @@ const siteContent = {
       items: [
         {
           title: "こえラボ",
+          reason:
+            "同僚の『自治体向け提案書が大変』という一言がきっかけ。セキュリティの制約で実現できなかった悔しさを、オープンデータで自分なりに形にした。",
           description:
             "住民アンケートの声をAIで分析し、論点抽出から政策提案までを支援する自治体向けツール。",
           category: "Policy AI / 自治体DX",
@@ -86,17 +89,22 @@ const siteContent = {
           impactNote: "信頼度 0.9〜0.95",
         },
         {
-          title: "業務委託更新自動チェックツール",
+          title: "LINE Bot × こえラボ",
+          reason:
+            "こえラボをもっと気軽に使えるように。LINEなら市民が普段使いのアプリで声を届けられると思った。",
           description:
-            "業務委託契約の更新日を自動監視し、1ヶ月前・2週間前に人事担当者と部署担当者へSlackで自動DM。登録から更新までSlackワークフローで完結。",
-          category: "業務自動化 / HR Tech",
-          accent: "from-[#dcf7ef] to-[#e8f6ff]",
-          tech: ["GAS", "Slack API", "Slack Workflow Builder", "Google Sheets"],
-          impact: "契約更新の抜け漏れゼロ",
-          impactNote: "毎朝9時に自動チェック",
+            "市民がLINEから気軽に声を届けられるチャットボット。n8nでRAG実装し、リッチメニューで3つの導線を提供。",
+          category: "Civic UX / 自治体DX",
+          accent: "from-[#dcf7ef] to-[#e9e2ff]",
+          tech: ["n8n", "LINE API", "Gemini API", "Google Sheets"],
+          impact: "構想・開発中",
+          impactNote: "RAGとLINE導線を統合",
+          status: "構想・開発中",
         },
         {
           title: "行政文書バスター",
+          reason:
+            "入札PDFを読んでエクセルに反映させる作業を同期が1時間近くかけて作業をしていたのを聞いて、なんとかしたくて作った。ハルシネーション対策で原文引用を全項目に付与する仕組みにこだわった。",
           description:
             "官公庁の入札PDF仕様書を自動解析し、提出書類・期限・エビデンスをスプレッドシートに出力。全項目に原文引用を付与してハルシネーションを抑制。",
           category: "Document AI / 業務効率化",
@@ -106,27 +114,9 @@ const siteContent = {
           impactNote: "全項目に原文引用を自動付与",
         },
         {
-          title: "営業支援ツール（競合PR自動収集）",
-          description:
-            "競合PR・タイアップ情報を2週間ごとに自動収集し、子育て向けメディア向けの提案たたき台をGeminiで自動生成。結果をSlackで営業チームへ通知。",
-          category: "Sales Automation / マーケティング",
-          accent: "from-[#e9e2ff] to-[#ffe7da]",
-          tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
-          impact: "提案準備を自動化",
-          impactNote: "営業チームのリサーチ工数を大幅削減",
-        },
-        {
-          title: "動画テロップ校閲ツール",
-          description:
-            "YouTube動画・mp4をGoogle AI StudioのGeminiに読み込ませ、テロップの誤字脱字・表記ゆれ・固有名詞ミスをタイムスタンプ付きで自動検出。",
-          category: "Video AI / 品質管理",
-          accent: "from-[#dff8ee] to-[#fff0df]",
-          tech: ["Google AI Studio", "Gemini", "プロンプトエンジニアリング"],
-          impact: "10分動画を5分以内にスクリーニング",
-          impactNote: "校閲時間を大幅短縮",
-        },
-        {
           title: "動画解析ツール（テロップ変化点抽出）",
+          reason:
+            "同僚が動画編集の現場で、テロップのスクショを手動でコピペする作業があまりにも大変で、初めてPythonで作ったプロダクト。",
           description:
             "動画をアップロードするとテロップの変化点を自動検出し、タイムスタンプ付き画像一覧・Excel・PowerPoint・ZIPで出力。",
           category: "Video AI / 制作支援",
@@ -143,28 +133,48 @@ const siteContent = {
           impactNote: "出力形式を一括生成",
         },
         {
-          title: "Gemini Gem 誤字脱字チェックツール",
+          title: "動画テロップ校閲ツール",
+          reason:
+            "同僚から動画のテロップ誤字を人の目だけでチェックするのに限界を感じると相談され、試してみた。Google AI StudioのGeminiに動画を読み込ませるだけでタイムスタンプ付きで指摘してくれる。",
           description:
-            "Gemini Gemを活用し、3つの文書を同時に誤字脱字チェックできるツール。上司の依頼で開発し、実導入済み。",
-          category: "ドキュメントAI / 業務効率化",
-          accent: "from-[#f3ecff] to-[#e8fff7]",
-          tech: ["Gemini Gem", "プロンプト設計"],
-          impact: "3文書を同時校閲",
-          impactNote: "複数文書の確認を並列自動化",
+            "YouTube動画・mp4をGoogle AI StudioのGeminiに読み込ませ、テロップの誤字脱字・表記ゆれ・固有名詞ミスをタイムスタンプ付きで自動検出。",
+          category: "Video AI / 品質管理",
+          accent: "from-[#dff8ee] to-[#fff0df]",
+          tech: ["Google AI Studio", "Gemini", "プロンプトエンジニアリング"],
+          impact: "10分動画を5分以内にスクリーニング",
+          impactNote: "校閲時間を大幅短縮",
         },
         {
-          title: "LINE Bot × こえラボ",
+          title: "介護学習サポート猫Bot",
+          reason:
+            "友人が仕事と勉強の両立で頑張っているのをみて、応援したくなった。厚生労働省の公式テキストをRAG化して、LINEで話しかけると猫キャラが応援してくれて、クイズも出してくれるBotを個人開発した。",
           description:
-            "市民がLINEから気軽に声を届けられるチャットボット。n8nでRAG実装し、リッチメニューで3つの導線を提供。",
-          category: "Civic UX / 自治体DX",
-          accent: "from-[#dcf7ef] to-[#e9e2ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "Google Sheets"],
-          impact: "構想・開発中",
-          impactNote: "RAGとLINE導線を統合",
-          status: "構想・開発中",
+            "友人の介護員養成講座の学習をサポートするために開発。厚生労働省の介護員養成講座テキスト（PDF）をRAG化し、LINEで話しかけると介護の知識を猫キャラクターがわかりやすく教えてくれるチャットボット。",
+          category: "Education AI / RAG活用",
+          accent: "from-[#e7f7ef] to-[#efe5ff]",
+          tech: ["n8n", "LINE API", "Gemini API", "RAG", "PDF解析"],
+          impact: "自主学習を24時間サポート",
+          impactNote: "公式テキストベースのRAGで回答の信頼性を担保",
+          status: "個人開発・運用中",
+          topBadge: "Cat Friendly",
+          specialBadge: "猫キャラでやさしく解説",
+        },
+        {
+          title: "業務委託更新自動チェックツール",
+          reason:
+            "人事から契約更新の抜け漏れが心配という声から生まれた。登録から更新まで全部Slackで完結するように設計した。",
+          description:
+            "業務委託契約の更新日を自動監視し、1ヶ月前・2週間前に人事担当者と部署担当者へSlackで自動DM。登録から更新までSlackワークフローで完結。",
+          category: "業務自動化 / HR Tech",
+          accent: "from-[#dcf7ef] to-[#e8f6ff]",
+          tech: ["GAS", "Slack API", "Slack Workflow Builder", "Google Sheets"],
+          impact: "契約更新の抜け漏れゼロ",
+          impactNote: "毎朝9時に自動チェック",
         },
         {
           title: "Slack内部相談窓口フロー",
+          reason:
+            "社内に匿名で相談できる場所が必要だと人事から相談され、設計した。心理的安全性を大切にした仕組みにこだわった。",
           description:
             "匿名相談対応のSlackワークフロー設計。ボタンから相談フォームを起動し、事務局3名に自動DM、Googleスプレッドシートにログ保存。",
           category: "社内DX / HR Tech",
@@ -174,39 +184,33 @@ const siteContent = {
           impactNote: "匿名相談システムを即導入",
         },
         {
-          title: "GAS社内AI講座",
+          title: "Gemini Gem 誤字脱字チェックツール",
+          reason:
+            "上司から『3つの文書を同時にチェックしたい』という依頼を受けて開発。実際に社内で導入済み。",
           description:
-            "「AIに日本語で話しかけるだけでGASコードが作れる」をテーマに、Googleフォーム自動返信システムの作り方を解説した非エンジニア向け社内研修資料。",
-          category: "AI教育 / 社内研修",
-          accent: "from-[#fff2e9] to-[#f0edff]",
-          tech: ["GAS", "Gemini", "ChatGPT"],
-          impact: "非エンジニアでも1日で習得",
-          impactNote: "GAS自動化の初学者研修として活用",
+            "Gemini Gemを活用し、3つの文書を同時に誤字脱字チェックできるツール。上司の依頼で開発し、実導入済み。",
+          category: "ドキュメントAI / 業務効率化",
+          accent: "from-[#f3ecff] to-[#e8fff7]",
+          tech: ["Gemini Gem", "プロンプト設計"],
+          impact: "3文書を同時校閲",
+          impactNote: "複数文書の確認を並列自動化",
         },
         {
-          title: "Genspark漫画化ツール活用提案",
+          title: "営業支援ツール（競合PR自動収集）",
+          reason:
+            "営業チームが毎回手動でリサーチしていた競合PR情報の収集を自動化したくて作った。",
           description:
-            "短編小説の漫画化をGensparkで効率化する提案。非エンジニアが2時間で外注レベル品質を達成し、CTOへのROI付き正式提案書として作成。",
-          category: "コンテンツ制作 / 業務効率化",
-          accent: "from-[#fff0df] to-[#dff8ee]",
-          tech: ["Genspark", "プロンプト設計"],
-          impact: "外注比89〜95%コスト削減",
-          impactNote: "作業時間を1/4に短縮",
-        },
-        {
-          title: "Noteブログ（AI活用シリーズ）",
-          description:
-            "生成AI推進担当として、現場でのAI活用ノウハウや試行錯誤をNoteで発信。「やってみたいしかなかった私が、エンジニアやCTOと生成AI推進を続けてきた話」はスキ13件を獲得。",
-          category: "発信 / ナレッジシェア",
-          accent: "from-[#ece8ff] to-[#fff2ea]",
-          tech: ["Note", "AI活用発信"],
-          href: "https://note.com/mei_0209",
-          linkLabel: "Noteを見る",
-          impact: "スキ13件を獲得",
-          impactNote: "現場のAI活用ノウハウを継続発信",
+            "競合PR・タイアップ情報を2週間ごとに自動収集し、子育て向けメディア向けの提案たたき台をGeminiで自動生成。結果をSlackで営業チームへ通知。",
+          category: "Sales Automation / マーケティング",
+          accent: "from-[#e9e2ff] to-[#ffe7da]",
+          tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
+          impact: "提案準備を自動化",
+          impactNote: "営業チームのリサーチ工数を大幅削減",
         },
         {
           title: "DateSuccess AI",
+          reason:
+            "ハッカソンで、チームメンバーのアイデアを聞いてGemini Canvasで即座にモック化。80分でアイデアから発表まで仕上げた。",
           description:
             "ハッカソンを起点に開発したAIコンシェルジュアプリ。店舗選びや会話準備の認知負荷をAIが肩代わりし、相手との時間に集中できる“余白”をつくるMVPとして設計。",
           category: "Lifestyle AI / Hackathon MVP",
@@ -225,17 +229,42 @@ const siteContent = {
           specialBadge: "ハッカソン発MVP",
         },
         {
-          title: "介護学習サポート猫Bot",
+          title: "GAS社内AI講座",
+          reason:
+            "非エンジニアの同僚にもAIを使ってほしくて、『日本語で話しかけるだけでGASが作れる』をテーマに研修資料を作った。",
           description:
-            "友人の介護員養成講座の学習をサポートするために開発。厚生労働省の介護員養成講座テキスト（PDF）をRAG化し、LINEで話しかけると介護の知識を猫キャラクターがわかりやすく教えてくれるチャットボット。",
-          category: "Education AI / RAG活用",
-          accent: "from-[#e7f7ef] to-[#efe5ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "RAG", "PDF解析"],
-          impact: "自主学習を24時間サポート",
-          impactNote: "公式テキストベースのRAGで回答の信頼性を担保",
-          status: "個人開発・運用中",
-          topBadge: "Cat Friendly",
-          specialBadge: "猫キャラでやさしく解説",
+            "「AIに日本語で話しかけるだけでGASコードが作れる」をテーマに、Googleフォーム自動返信システムの作り方を解説した非エンジニア向け社内研修資料。",
+          category: "AI教育 / 社内研修",
+          accent: "from-[#fff2e9] to-[#f0edff]",
+          tech: ["GAS", "Gemini", "ChatGPT"],
+          impact: "非エンジニアでも1日で習得",
+          impactNote: "GAS自動化の初学者研修として活用",
+        },
+        {
+          title: "Genspark漫画化ツール活用提案",
+          reason:
+            "同僚から短編小説の漫画化をAIで効率化できないか検証した。外注比89〜95%コスト削減のROI付き提案書としてCTOに正式提案した。",
+          description:
+            "短編小説の漫画化をGensparkで効率化する提案。非エンジニアが2時間で外注レベル品質を達成し、CTOへのROI付き正式提案書として作成。",
+          category: "コンテンツ制作 / 業務効率化",
+          accent: "from-[#fff0df] to-[#dff8ee]",
+          tech: ["Genspark", "プロンプト設計"],
+          impact: "外注比89〜95%コスト削減",
+          impactNote: "作業時間を1/4に短縮",
+        },
+        {
+          title: "Noteブログ（AI活用シリーズ）",
+          reason:
+            "現場でのAI活用ノウハウを言語化して発信したくて始めた。非エンジニア視点でのリアルな試行錯誤を書いている。",
+          description:
+            "生成AI推進担当として、現場でのAI活用ノウハウや試行錯誤をNoteで発信。「やってみたいしかなかった私が、エンジニアやCTOと生成AI推進を続けてきた話」はスキ13件を獲得。",
+          category: "発信 / ナレッジシェア",
+          accent: "from-[#ece8ff] to-[#fff2ea]",
+          tech: ["Note", "AI活用発信"],
+          href: "https://note.com/mei_0209",
+          linkLabel: "Noteを見る",
+          impact: "スキ13件を獲得",
+          impactNote: "現場のAI活用ノウハウを継続発信",
         },
       ] satisfies Project[],
     },
@@ -354,6 +383,8 @@ const siteContent = {
       items: [
         {
           title: "Koe Lab",
+          reason:
+            "It started from a teammate saying that municipality proposal writing was painfully hard. I wanted to give shape to that frustration on my own using open data.",
           description:
             "A municipality-focused tool that analyzes citizen survey responses with AI, extracts key issues, and supports policy proposal creation.",
           category: "Policy AI / GovTech",
@@ -366,17 +397,22 @@ const siteContent = {
           impactNote: "Confidence score: 0.9-0.95",
         },
         {
-          title: "Contract Renewal Auto Checker",
+          title: "LINE Bot × Koe Lab",
+          reason:
+            "I wanted Koe Lab to feel more approachable. LINE felt like the most natural way for citizens to send their voices through an app they already use.",
           description:
-            "Automatically monitors contractor renewal dates and sends Slack DMs to HR and team owners one month and two weeks in advance, all managed through Slack workflows.",
-          category: "Workflow Automation / HR Tech",
-          accent: "from-[#dcf7ef] to-[#e8f6ff]",
-          tech: ["GAS", "Slack API", "Slack Workflow Builder", "Google Sheets"],
-          impact: "Zero missed contract renewals",
-          impactNote: "Runs every morning at 9:00 AM",
+            "A chatbot that lets citizens submit their voices casually through LINE. Built with RAG on n8n and designed around three rich menu paths.",
+          category: "Civic UX / GovTech",
+          accent: "from-[#dcf7ef] to-[#e9e2ff]",
+          tech: ["n8n", "LINE API", "Gemini API", "Google Sheets"],
+          impact: "Currently in planning and development",
+          impactNote: "Combines RAG with LINE-based civic touchpoints",
+          status: "In planning / development",
         },
         {
           title: "Government Document Buster",
+          reason:
+            "I heard a coworker was spending nearly an hour reading bid PDFs and copying them into spreadsheets. I wanted to fix that, and I was especially careful to attach source quotations to every field.",
           description:
             "Parses government tender PDFs and outputs required documents, deadlines, and evidence into a spreadsheet, with source quotations attached to every item to reduce hallucinations.",
           category: "Document AI / Operational Efficiency",
@@ -386,27 +422,9 @@ const siteContent = {
           impactNote: "Automatic source citation for every output item",
         },
         {
-          title: "Sales Assist Tool (Auto Competitor PR Scan)",
-          description:
-            "Collects competitor PR and tie-up information every two weeks, generates proposal drafts for a parenting-focused media business with Gemini, and sends the results to the sales team via Slack.",
-          category: "Sales Automation / Marketing",
-          accent: "from-[#e9e2ff] to-[#ffe7da]",
-          tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
-          impact: "Automated proposal preparation",
-          impactNote: "Greatly reduced research time for the sales team",
-        },
-        {
-          title: "Video Caption Proofreading Tool",
-          description:
-            "Uploads YouTube videos and mp4 files to Gemini in Google AI Studio and detects caption typos, notation inconsistencies, and proper noun mistakes with timestamps.",
-          category: "Video AI / Quality Assurance",
-          accent: "from-[#dff8ee] to-[#fff0df]",
-          tech: ["Google AI Studio", "Gemini", "Prompt Engineering"],
-          impact: "Screened 10-minute videos in under 5 minutes",
-          impactNote: "Significantly reduced proofreading time",
-        },
-        {
           title: "Video Analysis Tool (Caption Change Detection)",
+          reason:
+            "A coworker was manually copying screenshot after screenshot from video editing timelines. It was overwhelming to watch, so I built this as my first Python product.",
           description:
             "Detects caption change points from uploaded videos and exports timestamped image lists, Excel files, PowerPoint files, and ZIP archives in one flow.",
           category: "Video AI / Production Support",
@@ -423,28 +441,48 @@ const siteContent = {
           impactNote: "Generated multiple output formats at once",
         },
         {
-          title: "Gemini Gem Proofreading Tool",
+          title: "Video Caption Proofreading Tool",
+          reason:
+            "A coworker told me they were hitting the limit of proofreading captions by eye alone. I tried feeding the video into Gemini in Google AI Studio, and it started flagging issues with timestamps.",
           description:
-            "A proofreading tool built with Gemini Gem that checks three documents at once. It was developed at a manager's request and has already been introduced in practice.",
-          category: "Document AI / Operational Efficiency",
-          accent: "from-[#f3ecff] to-[#e8fff7]",
-          tech: ["Gemini Gem", "Prompt Design"],
-          impact: "Proofread 3 documents at the same time",
-          impactNote: "Parallelized multi-document review work",
+            "Uploads YouTube videos and mp4 files to Gemini in Google AI Studio and detects caption typos, notation inconsistencies, and proper noun mistakes with timestamps.",
+          category: "Video AI / Quality Assurance",
+          accent: "from-[#dff8ee] to-[#fff0df]",
+          tech: ["Google AI Studio", "Gemini", "Prompt Engineering"],
+          impact: "Screened 10-minute videos in under 5 minutes",
+          impactNote: "Significantly reduced proofreading time",
         },
         {
-          title: "LINE Bot × Koe Lab",
+          title: "Care Study Support Cat Bot",
+          reason:
+            "A friend was working hard to balance caregiving work and study, and I wanted to cheer them on. So I built a personal bot that turns official learning materials into RAG and responds through an encouraging cat on LINE.",
           description:
-            "A chatbot that lets citizens submit their voices casually through LINE. Built with RAG on n8n and designed around three rich menu paths.",
-          category: "Civic UX / GovTech",
-          accent: "from-[#dcf7ef] to-[#e9e2ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "Google Sheets"],
-          impact: "Currently in planning and development",
-          impactNote: "Combines RAG with LINE-based civic touchpoints",
-          status: "In planning / development",
+            "A chatbot built to support a friend's caregiver training studies. It turns the official caregiver training PDF text into a RAG system and explains caregiving knowledge through a cat character on LINE.",
+          category: "Education AI / RAG",
+          accent: "from-[#e7f7ef] to-[#efe5ff]",
+          tech: ["n8n", "LINE API", "Gemini API", "RAG", "PDF Parsing"],
+          impact: "Supports self-study 24/7",
+          impactNote: "Reliability backed by RAG over official learning materials",
+          status: "Personal project / live",
+          topBadge: "Cat Friendly",
+          specialBadge: "Gentle cat guide",
+        },
+        {
+          title: "Contract Renewal Auto Checker",
+          reason:
+            "It came from HR worrying about missed contract renewals. I designed it so everything from registration to renewal could be completed inside Slack.",
+          description:
+            "Automatically monitors contractor renewal dates and sends Slack DMs to HR and team owners one month and two weeks in advance, all managed through Slack workflows.",
+          category: "Workflow Automation / HR Tech",
+          accent: "from-[#dcf7ef] to-[#e8f6ff]",
+          tech: ["GAS", "Slack API", "Slack Workflow Builder", "Google Sheets"],
+          impact: "Zero missed contract renewals",
+          impactNote: "Runs every morning at 9:00 AM",
         },
         {
           title: "Slack Internal Consultation Flow",
+          reason:
+            "HR told me there needed to be a place where people could reach out anonymously. I designed the workflow around psychological safety.",
           description:
             "An anonymous consultation workflow on Slack that launches a form from a button, notifies three staff members by DM, and logs the case to Google Sheets.",
           category: "Internal DX / HR Tech",
@@ -454,39 +492,33 @@ const siteContent = {
           impactNote: "Quickly deployable anonymous consultation flow",
         },
         {
-          title: "In-house GAS + AI Workshop",
+          title: "Gemini Gem Proofreading Tool",
+          reason:
+            "My manager asked for a way to check three documents at once. I built it in response, and it has already been adopted internally.",
           description:
-            "An internal training deck for non-engineers showing how to build a Google Forms auto-reply system by simply describing GAS code in Japanese to AI.",
-          category: "AI Education / Internal Training",
-          accent: "from-[#fff2e9] to-[#f0edff]",
-          tech: ["GAS", "Gemini", "ChatGPT"],
-          impact: "Non-engineers could learn automation in one day",
-          impactNote: "Used as a practical entry-level automation workshop",
+            "A proofreading tool built with Gemini Gem that checks three documents at once. It was developed at a manager's request and has already been introduced in practice.",
+          category: "Document AI / Operational Efficiency",
+          accent: "from-[#f3ecff] to-[#e8fff7]",
+          tech: ["Gemini Gem", "Prompt Design"],
+          impact: "Proofread 3 documents at the same time",
+          impactNote: "Parallelized multi-document review work",
         },
         {
-          title: "Genspark Manga Workflow Proposal",
+          title: "Sales Assist Tool (Auto Competitor PR Scan)",
+          reason:
+            "The sales team was manually researching competitor PR updates every time, so I wanted to automate that collection work.",
           description:
-            "A proposal for using Genspark to streamline manga adaptation from short fiction. A non-engineer achieved outsourcing-level quality in two hours and submitted a formal ROI proposal to the CTO.",
-          category: "Content Production / Operational Efficiency",
-          accent: "from-[#fff0df] to-[#dff8ee]",
-          tech: ["Genspark", "Prompt Design"],
-          impact: "Reduced outsourcing cost by 89-95%",
-          impactNote: "Cut production time down to one quarter",
-        },
-        {
-          title: "Note Blog (AI Use Series)",
-          description:
-            "I publish hands-on insights and trial-and-error stories from my role in generative AI enablement on Note. One featured article earned 13 likes.",
-          category: "Writing / Knowledge Sharing",
-          accent: "from-[#ece8ff] to-[#fff2ea]",
-          tech: ["Note", "AI Practice Writing"],
-          href: "https://note.com/mei_0209",
-          linkLabel: "Read on Note",
-          impact: "Featured article earned 13 likes",
-          impactNote: "Continuously sharing practical AI usage know-how",
+            "Collects competitor PR and tie-up information every two weeks, generates proposal drafts for a parenting-focused media business with Gemini, and sends the results to the sales team via Slack.",
+          category: "Sales Automation / Marketing",
+          accent: "from-[#e9e2ff] to-[#ffe7da]",
+          tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
+          impact: "Automated proposal preparation",
+          impactNote: "Greatly reduced research time for the sales team",
         },
         {
           title: "DateSuccess AI",
+          reason:
+            "At a hackathon, I heard a teammate's idea and mocked it up immediately with Gemini Canvas. We got from concept to presentation in 80 minutes.",
           description:
             "An AI concierge app prototyped through a hackathon. It reduces the cognitive load of venue selection and conversation prep, creating more room for people to focus on the time they share together.",
           category: "Lifestyle AI / Hackathon MVP",
@@ -505,17 +537,42 @@ const siteContent = {
           specialBadge: "Built during a hackathon",
         },
         {
-          title: "Care Study Support Cat Bot",
+          title: "In-house GAS + AI Workshop",
+          reason:
+            "I wanted non-engineer colleagues to be able to use AI too, so I created training materials around the idea that AI can generate GAS code just from Japanese instructions.",
           description:
-            "A chatbot built to support a friend's caregiver training studies. It turns the official caregiver training PDF text into a RAG system and explains caregiving knowledge through a cat character on LINE.",
-          category: "Education AI / RAG",
-          accent: "from-[#e7f7ef] to-[#efe5ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "RAG", "PDF Parsing"],
-          impact: "Supports self-study 24/7",
-          impactNote: "Reliability backed by RAG over official learning materials",
-          status: "Personal project / live",
-          topBadge: "Cat Friendly",
-          specialBadge: "Gentle cat guide",
+            "An internal training deck for non-engineers showing how to build a Google Forms auto-reply system by simply describing GAS code in Japanese to AI.",
+          category: "AI Education / Internal Training",
+          accent: "from-[#fff2e9] to-[#f0edff]",
+          tech: ["GAS", "Gemini", "ChatGPT"],
+          impact: "Non-engineers could learn automation in one day",
+          impactNote: "Used as a practical entry-level automation workshop",
+        },
+        {
+          title: "Genspark Manga Workflow Proposal",
+          reason:
+            "A coworker asked whether short-fiction manga adaptation could be made more efficient with AI. I tested it and turned the result into a formal ROI proposal for the CTO.",
+          description:
+            "A proposal for using Genspark to streamline manga adaptation from short fiction. A non-engineer achieved outsourcing-level quality in two hours and submitted a formal ROI proposal to the CTO.",
+          category: "Content Production / Operational Efficiency",
+          accent: "from-[#fff0df] to-[#dff8ee]",
+          tech: ["Genspark", "Prompt Design"],
+          impact: "Reduced outsourcing cost by 89-95%",
+          impactNote: "Cut production time down to one quarter",
+        },
+        {
+          title: "Note Blog (AI Use Series)",
+          reason:
+            "I started writing because I wanted to put practical AI know-how from the field into words. It documents real trial and error from a non-engineer perspective.",
+          description:
+            "I publish hands-on insights and trial-and-error stories from my role in generative AI enablement on Note. One featured article earned 13 likes.",
+          category: "Writing / Knowledge Sharing",
+          accent: "from-[#ece8ff] to-[#fff2ea]",
+          tech: ["Note", "AI Practice Writing"],
+          href: "https://note.com/mei_0209",
+          linkLabel: "Read on Note",
+          impact: "Featured article earned 13 likes",
+          impactNote: "Continuously sharing practical AI usage know-how",
         },
       ] satisfies Project[],
     },
@@ -839,6 +896,11 @@ export default function Home() {
                     <h3 className="mt-4 break-words text-xl font-semibold text-slate-800 sm:text-2xl">
                       {project.title}
                     </h3>
+                    {project.reason ? (
+                      <p className="mt-3 break-words text-xs leading-6 text-slate-500 sm:text-sm sm:leading-7">
+                        {project.reason}
+                      </p>
+                    ) : null}
                     <p className="mt-4 break-words text-sm leading-7 text-slate-600">
                       {project.description}
                     </p>
