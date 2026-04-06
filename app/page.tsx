@@ -49,11 +49,11 @@ const siteContent = {
       eyebrow: "About",
       title: "データと人間のあいだに、使えるAI体験をつくる",
       paragraphs: [
-        "国内IT企業で、広告制作と生成AI推進を横断しながら働いています。広告記事制作、動画編集、子育て領域のイベント運営、Instagram施策など、現場に近い仕事を担いながら、業務の中にAIを自然に組み込むことを実践しています。",
-        "生成AI推進担当として、社内AI講座の企画・実施も担当。新入社員や中途社員にも伝わる形で、AIを「すごい技術」ではなく「明日から使える相棒」として届ける設計を続けています。",
-        "放送大学でドゥルーズ哲学を学び、SF映画とオカルトをこよなく愛する視点から、複雑なものを構造として捉え直すのが得意です。現在は「データと人間をつなぐAI」の設計をテーマに、複数のプロダクトを開発中です。",
-        "技術を学ぼうと思って使ったことは一度もない。解決したい課題が明確にあったとき、AIが必要な技術を教えてくれて、気づいたら動くものができていた。だから私の強みは、技術の深さより、課題を見つけて形にするまでの速さだと思っている。",
-        "誰かの『できなかった』を、自分の『やってみよう』に変えることが、私の開発スタイルだ。",
+        "国内IT企業で、広告制作と生成AI推進を掛け持ちしながら働いています。現場のど真ん中にいながら、「これAIでなんとかならないかな」をずっとやってきました。",
+        "社内AI講座も担当していて、AIを「すごい技術」じゃなくて「明日から使える相棒」として届けるのが好きです。",
+        "哲学とSF映画とオカルトが好きで、複雑なものを構造として捉え直すクセが、たぶんAI設計にも出ています。",
+        "技術を学ぼうと思って使ったことは、一度もないんです。誰かの「これ大変」を聞いて、AIに相談して、気づいたら動くものができていた。その繰り返しです。",
+        "誰かの「できなかった」を、自分の「やってみよう」に変えることが、私のスタイルです。",
       ],
     },
     profile: {
@@ -627,6 +627,22 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-slate-700">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed bottom-6 left-0 z-40 sm:bottom-8"
+        initial={{ x: "-15vw", opacity: 0 }}
+        animate={{ x: "110vw", opacity: [0, 1, 1, 0] }}
+        transition={{ duration: 4.2, ease: "linear", times: [0, 0.08, 0.92, 1] }}
+      >
+        <motion.span
+          className="block text-4xl sm:text-5xl"
+          animate={{ y: [0, -4, 0, 4, 0] }}
+          transition={{ duration: 0.5, ease: "easeInOut", repeat: 8 }}
+        >
+          🐈
+        </motion.span>
+      </motion.div>
+
       <header className="sticky top-0 z-20 border-b border-white/70 bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-col items-start gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <a
