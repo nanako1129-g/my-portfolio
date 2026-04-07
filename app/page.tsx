@@ -89,19 +89,6 @@ const siteContent = {
           impactNote: "信頼度 0.9〜0.95",
         },
         {
-          title: "LINE Bot × こえラボ",
-          reason:
-            "こえラボをもっと気軽に使えるように。LINEなら市民が普段使いのアプリで声を届けられると思った。",
-          description:
-            "市民がLINEから気軽に声を届けられるチャットボット。n8nでRAG実装し、リッチメニューで3つの導線を提供。",
-          category: "Civic UX / 自治体DX",
-          accent: "from-[#dcf7ef] to-[#e9e2ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "Google Sheets"],
-          impact: "構想・開発中",
-          impactNote: "RAGとLINE導線を統合",
-          status: "構想・開発中",
-        },
-        {
           title: "行政文書バスター",
           reason:
             "入札PDFを読んでエクセルに反映させる作業を同期が1時間近くかけて作業をしていたのを聞いて、なんとかしたくて作った。ハルシネーション対策で原文引用を全項目に付与する仕組みにこだわった。",
@@ -369,19 +356,6 @@ const siteContent = {
           github: "https://github.com/nanako1129-g/koelab",
           impact: "Analyzed 1,888 responses in minutes",
           impactNote: "Confidence score: 0.9-0.95",
-        },
-        {
-          title: "LINE Bot × Koe Lab",
-          reason:
-            "I wanted Koe Lab to feel more approachable. LINE felt like the most natural way for citizens to send their voices through an app they already use.",
-          description:
-            "A chatbot that lets citizens submit their voices casually through LINE. Built with RAG on n8n and designed around three rich menu paths.",
-          category: "Civic UX / GovTech",
-          accent: "from-[#dcf7ef] to-[#e9e2ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "Google Sheets"],
-          impact: "Currently in planning and development",
-          impactNote: "Combines RAG with LINE-based civic touchpoints",
-          status: "In planning / development",
         },
         {
           title: "Government Document Buster",
