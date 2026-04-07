@@ -739,7 +739,11 @@ export default function Home() {
               {content.about.paragraphs.map((paragraph, index) => (
                 <p
                   key={paragraph}
-                  className={`break-words text-sm leading-7 text-slate-600 sm:text-base sm:leading-8 ${
+                  className={`break-words ${
+                    index === content.about.paragraphs.length - 1
+                      ? "rounded-2xl bg-[#f6f1ff] px-4 py-4 text-base font-medium leading-8 text-slate-700 shadow-[0_10px_30px_rgba(181,157,247,0.12)]"
+                      : "text-sm leading-7 text-slate-600 sm:text-base sm:leading-8"
+                  } ${
                     index === 0 ? "mt-5" : "mt-4"
                   }`}
                 >
@@ -791,14 +795,21 @@ export default function Home() {
                     boxShadow: "0 24px 70px rgba(148, 163, 184, 0.18)",
                   }}
                   className={`group block w-full max-w-full min-h-[26rem] rounded-[2rem] border bg-white p-5 shadow-[0_14px_45px_rgba(148,163,184,0.12)] sm:min-h-[28rem] sm:p-6 ${
-                    project.specialBadge
-                      ? "border-[#f2d9ea] shadow-[0_18px_55px_rgba(236,181,210,0.18)]"
-                      : "border-white"
+                    index < 3
+                      ? "border-[#d9cdfd] bg-[linear-gradient(180deg,_#fffdfd,_#fcf9ff)] shadow-[0_20px_60px_rgba(181,157,247,0.16)]"
+                      : project.specialBadge
+                        ? "border-[#f2d9ea] shadow-[0_18px_55px_rgba(236,181,210,0.18)]"
+                        : "border-white"
                   }`}
                 >
                   <div
                     className={`relative h-28 rounded-[1.5rem] bg-gradient-to-br ${project.accent}`}
                   >
+                    {index < 3 ? (
+                      <div className="absolute left-3 top-3 rounded-full bg-[#f3ecff] px-3 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#7c61d6] sm:left-4 sm:top-4 sm:text-xs">
+                        Featured
+                      </div>
+                    ) : null}
                     {project.topBadge ? (
                       <div className="absolute right-3 top-3 max-w-[calc(100%-1.5rem)] rounded-full bg-white/80 px-3 py-1 text-[10px] font-medium text-[#b86f94] backdrop-blur sm:right-4 sm:top-4 sm:text-xs">
                         {project.topBadge}
