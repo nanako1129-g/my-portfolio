@@ -138,16 +138,16 @@ const siteContent = {
           impactNote: "校閲時間を大幅短縮",
         },
         {
-          title: "介護学習サポート猫Bot",
+          title: "学習サポート猫Bot",
           reason:
-            "友人が仕事と勉強の両立で頑張っているのをみて、応援したくなった。厚生労働省の公式テキストをRAG化して、LINEで話しかけると猫キャラが応援してくれて、クイズも出してくれるBotを個人開発した。",
+            "友人が仕事と勉強の両立で頑張っているのを見て、応援したくなった。公的な学習資料をもとにRAG構成を組み、LINEで話しかけると猫キャラがやさしく解説し、クイズも出してくれるBotを個人開発した。",
           description:
-            "友人の介護員養成講座の学習をサポートするために開発。厚生労働省の介護員養成講座テキスト（PDF）をRAG化し、LINEで話しかけると介護の知識を猫キャラクターがわかりやすく教えてくれるチャットボット。",
+            "資格学習に取り組む友人をサポートするために開発。学習用PDFをRAG化し、LINEで話しかけると関連知識を猫キャラクターがわかりやすく教えてくれるチャットボット。",
           category: "Education AI / RAG活用",
           accent: "from-[#e7f7ef] to-[#efe5ff]",
           tech: ["n8n", "LINE API", "Gemini API", "RAG", "PDF解析"],
           impact: "自主学習を24時間サポート",
-          impactNote: "公式テキストベースのRAGで回答の信頼性を担保",
+          impactNote: "学習資料ベースのRAGで回答の信頼性を担保",
           status: "個人開発・運用中",
           topBadge: "Cat Friendly",
           specialBadge: "猫キャラでやさしく解説",
