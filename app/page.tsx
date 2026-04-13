@@ -16,6 +16,9 @@ type Project = {
   impactNote: string;
   href?: string;
   linkLabel?: string;
+  downloadHref?: string;
+  downloadLabel?: string;
+  helperText?: string;
   github?: string;
   status?: string;
   topBadge?: string;
@@ -84,6 +87,9 @@ const siteContent = {
           tech: ["Python", "Streamlit", "Gemini API", "pdfplumber"],
           href: "https://koelab-jcpyclka4upmbz6bzderbq.streamlit.app",
           linkLabel: "デモを見る",
+          downloadHref: "/koelab-demo.csv",
+          downloadLabel: "サンプルCSVをDL",
+          helperText: "こえラボにそのまま入れて試せるデモ用CSVです。",
           github: "https://github.com/nanako1129-g/koelab",
           impact: "1,888件を数分で分析",
           impactNote: "信頼度 0.9〜0.95",
@@ -354,6 +360,9 @@ const siteContent = {
           tech: ["Python", "Streamlit", "Gemini API", "pdfplumber"],
           href: "https://koelab-jcpyclka4upmbz6bzderbq.streamlit.app",
           linkLabel: "Live Demo",
+          downloadHref: "/koelab-demo.csv",
+          downloadLabel: "Download Sample CSV",
+          helperText: "A demo CSV you can download and upload into Koe Lab to try it out.",
           github: "https://github.com/nanako1129-g/koelab",
           impact: "Analyzed 1,888 responses in minutes",
           impactNote: "Confidence score: 0.9-0.95",
@@ -872,6 +881,15 @@ export default function Home() {
                         {project.linkLabel}
                       </a>
                     ) : null}
+                    {project.downloadHref ? (
+                      <a
+                        href={project.downloadHref}
+                        download
+                        className="inline-flex w-full items-center justify-center rounded-full border border-[#d8cef8] bg-[#faf6ff] px-4 py-2 text-sm font-medium text-[#7c61d6] transition hover:bg-[#f2eaff] sm:w-auto"
+                      >
+                        {project.downloadLabel}
+                      </a>
+                    ) : null}
                     {project.github ? (
                       <a
                         href={project.github}
@@ -888,6 +906,11 @@ export default function Home() {
                       </span>
                     ) : null}
                   </div>
+                  {project.helperText ? (
+                    <p className="mt-3 break-words text-xs leading-6 text-slate-500">
+                      {project.helperText}
+                    </p>
+                  ) : null}
                 </motion.article>
               ))}
             </div>
