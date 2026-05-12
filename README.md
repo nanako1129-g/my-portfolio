@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 My Portfolio
 
-## Getting Started
+> 非エンジニアでも、AIを相棒にすれば"構造"から変えられる。
 
-First, run the development server:
+**宮坂めい奈（Meina Miyasaka）のポートフォリオサイト**  
+AIプロダクト・自動化ツール・業務改善プロジェクトをまとめた、やさしいパステルカラーのポートフォリオです。
+
+🌸 **公開URL**：https://my-portfolio-chi-rust-57.vercel.app/
+
+---
+
+## ✨ このサイトについて
+
+業務の傍らで作ってきたAIプロダクトや自動化ツールを「見せられる形」にまとめたポートフォリオサイトです。  
+2026年4月、**Cursor（AI）と一緒に1日で構築**しました。
+
+- 🏛 **Civic / 自治体DX**：こえラボ、葛飾区ソシャレポくん、Sacred Boundary など
+- ⚙️ **業務改善 / DX**：契約更新自動チェック、Gemini Gem校閲、動画解析 など
+- 🎭 **エンタメ・体験**：イケオジの深夜Bar、高嶺の花子さん、あそび場メモ など
+- 🎓 **教育・コミュニティ**：GAS社内AI講座、学習サポート猫Bot など
+
+合計 **16プロジェクト** を、Featured / カテゴリタブ / 日英切り替え対応で掲載しています。
+
+---
+
+## 🛠 使用技術
+
+| 技術 | 用途 |
+|------|------|
+| **Next.js 16** | Webフレームワーク（App Router） |
+| **TypeScript** | 型安全な開発 |
+| **Tailwind CSS** | スタイリング・パステルカラーデザイン |
+| **Framer Motion** | フェードイン・タブ切り替えアニメーション |
+| **Vercel** | ホスティング・自動デプロイ |
+| **Cursor** | AIコーディングアシスタント |
+
+---
+
+## 🌟 主な機能
+
+- 🎨 **パステルカラーのやさしいデザイン**（ラベンダー・ミントグリーン・ピーチ）
+- 🌐 **日本語 / 英語 切り替え**（i18n対応）
+- ⭐ **Featured セクション**：代表作3つをトップでハイライト
+- 🗂 **カテゴリタブ**：Civic / Business / Entertainment / Education でフィルタリング
+- 📱 **モバイルファースト**：1カラム ↔ 2カラムのレスポンシブ対応
+- ✨ **アニメーション**：スクロール時のフェードイン、ホバーで浮き上がるカード
+- 📬 **お問い合わせフォーム**：Googleフォーム + GAS連携
+
+---
+
+## 🚀 開発の流れ
+
+1. **環境構築**（約30分）— `npx create-next-app@latest` から雛形生成
+2. **デザイン生成**（約15分）— Cursorに日本語プロンプトを送るだけ
+3. **コンテンツ入力**（約2時間）— 13プロジェクトを掲載
+4. **英語版追加**（約30分）— 「英語バージョンも作って」の一言で対応
+5. **スマホ対応**（約30分）— `grid-cols-1` への調整
+6. **デプロイ**（約15分）— GitHub push → Vercel 自動デプロイ
+7. **お問い合わせフォーム追加**（約20分）— GAS で自動メール転送
+
+⏱ **合計：約4〜5時間で完成**
+
+---
+
+## 🆙 アップデート履歴
+
+### v3 — 2026年5月
+- 🆕 新規5プロジェクト追加（Sacred Boundary / 葛飾区ソシャレポくん / 高嶺の花子さん / イケオジの深夜Bar / あそび場メモ）
+- ⭐ **Featuredセクション** 新設（代表作3つを上段に固定）
+- 🗂 **カテゴリタブ** 実装（横スクロール対応・フェード切り替え）
+- 📊 **スキルセクションを2×2グリッドに再構成**（AI/Data・Web開発・自動化/業務改善・プロダクト/企画）
+- 🌐 i18n 対応強化（全タブ・バッジ・スキル項目を JA/EN 両対応）
+
+### v2 — 2026年4月7日
+- 📝 Aboutセクションを大幅強化（人柄が伝わる文章に刷新）
+- 💬 各プロジェクトに開発動機（なぜ作ったか）を追加
+- 🗂 スキルセクションを3分野に整理
+
+### v1 — 2026年4月4日
+- 🎉 初回リリース（1日で完成）
+
+---
+
+## 💡 開発を通じて気づいたこと
+
+> **「コードを書く」から「AIに設計を伝える」へ**
+>
+> エンジニアリングの本質が変わってきていることを実感した開発でした。  
+> コードを暗記して書く時代ではなく、「何を作りたいか」「なぜ作るか」「どう見せるか」を考えて、  
+> AIに的確に伝える力が重要になっている。
+>
+> Cursorに送ったプロンプトは全部日本語。それでも Next.js + Tailwind CSS + Framer Motion を使った  
+> プロフェッショナルなサイトが1日で完成しました。
+>
+> **AIを道具として使いこなすこと**が、2026年のエンジニアリングだと思う。
+
+---
+
+## 🔮 今後やりたいこと
+
+- [ ] プロジェクト画像・スクリーンショットの追加
+- [ ] こえラボのデモ動画を埋め込み
+- [ ] カスタムドメインの設定
+- [ ] Vercel Analytics でアクセス解析
+- [ ] 夏のハッカソン作品の追加
+
+---
+
+## 🏃 ローカル開発
 
 ```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバー起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# → http://localhost:3000 で確認
+
+# ビルド
+npm run build
+
+# Lint
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📬 お問い合わせ
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+サイト内のお問い合わせフォーム、または GitHub Issues / Discussions からお気軽にどうぞ。
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🌸 *Made with Cursor, Claude, and a lot of pastel colors.*
