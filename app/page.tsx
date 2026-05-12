@@ -1,29 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  featuredProjectIds,
+  portfolioProjectDisplayOrder,
+  portfolioProjectsEn,
+  portfolioProjectsJa,
+  projectTabsEn,
+  projectTabsJa,
+  type PortfolioProject,
+  type ProjectFilter,
+} from "@/lib/portfolio-projects";
 
 type Locale = "ja" | "en";
-
-type Project = {
-  title: string;
-  reason?: string;
-  description: string;
-  category: string;
-  accent: string;
-  tech: string[];
-  impact: string;
-  impactNote: string;
-  href?: string;
-  linkLabel?: string;
-  downloadHref?: string;
-  downloadLabel?: string;
-  helperText?: string;
-  github?: string;
-  status?: string;
-  topBadge?: string;
-  specialBadge?: string;
-};
 
 const navigationItems = [
   { label: "About", href: "#about" },
@@ -75,204 +65,70 @@ const siteContent = {
       title: "社会課題にやさしく触れるAIプロジェクト",
       impactLabel: "Impact",
       githubLabel: "GitHub",
-      items: [
-        {
-          title: "こえラボ",
-          reason:
-            "同僚の『自治体向け提案書が大変』という一言がきっかけ。セキュリティの制約で実現できなかった悔しさを、オープンデータで自分なりに形にした。",
-          description:
-            "住民アンケートの声をAIで分析し、論点抽出から政策提案までを支援する自治体向けツール。",
-          category: "Policy AI / 自治体DX",
-          accent: "from-[#e6dcff] to-[#dff8ee]",
-          tech: ["Python", "Streamlit", "Gemini API", "pdfplumber"],
-          href: "https://koelab-jcpyclka4upmbz6bzderbq.streamlit.app",
-          linkLabel: "デモを見る",
-          downloadHref: "/koelab-demo.csv",
-          downloadLabel: "サンプルCSVをDL",
-          helperText: "こえラボにそのまま入れて試せるデモ用CSVです。",
-          github: "https://github.com/nanako1129-g/koelab",
-          impact: "1,888件を数分で分析",
-          impactNote: "信頼度 0.9〜0.95",
-        },
-        {
-          title: "行政文書バスター",
-          reason:
-            "入札PDFを読んでエクセルに反映させる作業を同期が1時間近くかけて作業をしていたのを聞いて、なんとかしたくて作った。ハルシネーション対策で原文引用を全項目に付与する仕組みにこだわった。",
-          description:
-            "官公庁の入札PDF仕様書を自動解析し、提出書類・期限・エビデンスをスプレッドシートに出力。全項目に原文引用を付与してハルシネーションを抑制。",
-          category: "Document AI / 業務効率化",
-          accent: "from-[#fff0df] to-[#efe7ff]",
-          tech: ["GAS", "Gemini API", "Google Drive API"],
-          impact: "1案件1時間超を約1分に短縮",
-          impactNote: "全項目に原文引用を自動付与",
-        },
-        {
-          title: "動画解析ツール（テロップ変化点抽出）",
-          reason:
-            "同僚が動画編集の現場で、テロップのスクショを手動でコピペする作業があまりにも大変で、初めてPythonで作ったプロダクト。",
-          description:
-            "動画をアップロードするとテロップの変化点を自動検出し、タイムスタンプ付き画像一覧・Excel・PowerPoint・ZIPで出力。",
-          category: "Video AI / 制作支援",
-          accent: "from-[#ffe4d9] to-[#fff1cc]",
-          tech: [
-            "Python",
-            "OpenCV",
-            "Gradio",
-            "pandas",
-            "openpyxl",
-            "python-pptx",
-          ],
-          impact: "1時間のスクショ作業を5分に短縮",
-          impactNote: "出力形式を一括生成",
-        },
-        {
-          title: "動画テロップ校閲ツール",
-          reason:
-            "同僚から動画のテロップ誤字を人の目だけでチェックするのに限界を感じると相談され、試してみた。Google AI StudioのGeminiに動画を読み込ませるだけでタイムスタンプ付きで指摘してくれる。",
-          description:
-            "YouTube動画・mp4をGoogle AI StudioのGeminiに読み込ませ、テロップの誤字脱字・表記ゆれ・固有名詞ミスをタイムスタンプ付きで自動検出。",
-          category: "Video AI / 品質管理",
-          accent: "from-[#dff8ee] to-[#fff0df]",
-          tech: ["Google AI Studio", "Gemini", "プロンプトエンジニアリング"],
-          impact: "10分動画を5分以内にスクリーニング",
-          impactNote: "校閲時間を大幅短縮",
-        },
-        {
-          title: "学習サポート猫Bot",
-          reason:
-            "友人が仕事と勉強の両立で頑張っているのを見て、応援したくなった。公的な学習資料をもとにRAG構成を組み、LINEで話しかけると猫キャラがやさしく解説し、クイズも出してくれるBotを個人開発した。",
-          description:
-            "資格学習に取り組む友人をサポートするために開発。学習用PDFをRAG化し、LINEで話しかけると関連知識を猫キャラクターがわかりやすく教えてくれるチャットボット。",
-          category: "Education AI / RAG活用",
-          accent: "from-[#e7f7ef] to-[#efe5ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "RAG", "PDF解析"],
-          impact: "自主学習を24時間サポート",
-          impactNote: "学習資料ベースのRAGで回答の信頼性を担保",
-          status: "個人開発・運用中",
-          topBadge: "Cat Friendly",
-          specialBadge: "猫キャラでやさしく解説",
-        },
-        {
-          title: "業務委託更新自動チェックツール",
-          reason:
-            "人事から契約更新の抜け漏れが心配という声から生まれた。登録から更新まで全部Slackで完結するように設計した。",
-          description:
-            "業務委託契約の更新日を自動監視し、1ヶ月前・2週間前に人事担当者と部署担当者へSlackで自動DM。登録から更新までSlackワークフローで完結。",
-          category: "業務自動化 / HR Tech",
-          accent: "from-[#dcf7ef] to-[#e8f6ff]",
-          tech: ["GAS", "Slack API", "Slack Workflow Builder", "Google Sheets"],
-          impact: "契約更新の抜け漏れゼロ",
-          impactNote: "毎朝9時に自動チェック",
-        },
-        {
-          title: "Slack内部相談窓口フロー",
-          reason:
-            "社内に匿名で相談できる場所が必要だと人事から相談され、設計した。心理的安全性を大切にした仕組みにこだわった。",
-          description:
-            "匿名相談対応のSlackワークフロー設計。ボタンから相談フォームを起動し、事務局3名に自動DM、Googleスプレッドシートにログ保存。",
-          category: "社内DX / HR Tech",
-          accent: "from-[#eaf8ff] to-[#eef3ff]",
-          tech: ["Slack Workflow Builder", "Google Sheets"],
-          impact: "10〜15分で構築可能",
-          impactNote: "匿名相談システムを即導入",
-        },
-        {
-          title: "Gemini Gem 誤字脱字チェックツール",
-          reason:
-            "上司から『3つの文書を同時にチェックしたい』という依頼を受けて開発。実際に社内で導入済み。",
-          description:
-            "Gemini Gemを活用し、3つの文書を同時に誤字脱字チェックできるツール。上司の依頼で開発し、実導入済み。",
-          category: "ドキュメントAI / 業務効率化",
-          accent: "from-[#f3ecff] to-[#e8fff7]",
-          tech: ["Gemini Gem", "プロンプト設計"],
-          impact: "3文書を同時校閲",
-          impactNote: "複数文書の確認を並列自動化",
-        },
-        {
-          title: "営業支援ツール（競合PR自動収集）",
-          reason:
-            "営業チームが毎回手動でリサーチしていた競合PR情報の収集を自動化したくて作った。",
-          description:
-            "競合PR・タイアップ情報を2週間ごとに自動収集し、子育て向けメディア向けの提案たたき台をGeminiで自動生成。結果をSlackで営業チームへ通知。",
-          category: "Sales Automation / マーケティング",
-          accent: "from-[#e9e2ff] to-[#ffe7da]",
-          tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
-          impact: "提案準備を自動化",
-          impactNote: "営業チームのリサーチ工数を大幅削減",
-        },
-        {
-          title: "DateSuccess AI",
-          reason:
-            "ハッカソンで、チームメンバーのアイデアを聞いてGemini Canvasで即座にモック化。80分でアイデアから発表まで仕上げた。",
-          description:
-            "ハッカソンを起点に開発したAIコンシェルジュアプリ。店舗選びや会話準備の認知負荷をAIが肩代わりし、相手との時間に集中できる“余白”をつくるMVPとして設計。",
-          category: "Lifestyle AI / Hackathon MVP",
-          accent: "from-[#ffe8ef] to-[#efe7ff]",
-          tech: [
-            "React",
-            "Tailwind CSS",
-            "GAS",
-            "Gemini API",
-            "Hot Pepper API",
-            "Netlify",
-          ],
-          impact: "ハッカソン発のMVPを短期間で稼働",
-          impactNote: "低コストなサーバーレス構成で素早く検証",
-          topBadge: "Hackathon",
-          specialBadge: "ハッカソン発MVP",
-        },
-        {
-          title: "GAS社内AI講座",
-          reason:
-            "非エンジニアの同僚にもAIを使ってほしくて、『日本語で話しかけるだけでGASが作れる』をテーマに研修資料を作った。",
-          description:
-            "「AIに日本語で話しかけるだけでGASコードが作れる」をテーマに、Googleフォーム自動返信システムの作り方を解説した非エンジニア向け社内研修資料。",
-          category: "AI教育 / 社内研修",
-          accent: "from-[#fff2e9] to-[#f0edff]",
-          tech: ["GAS", "Gemini", "ChatGPT"],
-          impact: "非エンジニアでも1日で習得",
-          impactNote: "GAS自動化の初学者研修として活用",
-        },
-      ] satisfies Project[],
+      featuredBadge: "⭐ Featured",
+      featuredSectionTitle: "🌟 Featured Projects",
+      featuredSectionSubtitle: "メイナを構成する3つの軸",
+      categoryRailLabel: "カテゴリ",
+      tabsListAriaLabel: "プロジェクトをカテゴリで絞り込む",
+      tabs: projectTabsJa,
+      items: portfolioProjectsJa,
     },
     skills: {
       eyebrow: "Skills",
       title: "データ理解から体験設計まで",
       groups: [
         {
-          title: "AI / Data",
+          title: "🤖 AI / Data",
           items: [
             "Gemini API",
             "ChatGPT API",
-            "LLMアプリ設計",
-            "RAG",
-            "プロンプト設計・評価・改善",
             "Google AI Studio",
             "Genspark活用",
+            "LLMアプリ設計",
+            "プロンプト設計・評価・改善",
+            "RAG",
             "データ分析・可視化",
+            "地理データ分析",
           ],
         },
         {
-          title: "自動化 / 開発",
+          title: "💻 Web開発",
+          items: [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "Supabase",
+            "Vercel",
+            "Framer Motion / CSS Animation",
+          ],
+        },
+        {
+          title: "⚙️ 自動化 / 業務改善",
           items: [
             "Python",
             "Streamlit",
+            "folium",
             "Google Apps Script (GAS)",
             "n8n",
             "Slack API",
             "LINE API",
             "Google Sheets自動化",
+            "VOICEVOX / Web Speech API",
           ],
         },
         {
-          title: "プロダクト / 企画",
+          title: "📊 プロダクト / 企画",
           items: [
             "新規事業企画・提案",
             "ROI分析",
             "AI講座設計・実施",
+            "社内AI推進・変革支援",
             "ユーザーインタビュー",
             "要件整理",
-            "社内AI推進・変革支援",
+            "PoC・MVP設計",
+            "クリーンアーキテクチャ設計",
+            "多言語UI設計（i18n）",
           ],
         },
       ],
@@ -348,165 +204,13 @@ const siteContent = {
       title: "AI projects shaped around real-world problems",
       impactLabel: "Impact",
       githubLabel: "GitHub",
-      items: [
-        {
-          title: "Koe Lab",
-          reason:
-            "It started from a teammate saying that municipality proposal writing was painfully hard. I wanted to give shape to that frustration on my own using open data.",
-          description:
-            "A municipality-focused tool that analyzes citizen survey responses with AI, extracts key issues, and supports policy proposal creation.",
-          category: "Policy AI / GovTech",
-          accent: "from-[#e6dcff] to-[#dff8ee]",
-          tech: ["Python", "Streamlit", "Gemini API", "pdfplumber"],
-          href: "https://koelab-jcpyclka4upmbz6bzderbq.streamlit.app",
-          linkLabel: "Live Demo",
-          downloadHref: "/koelab-demo.csv",
-          downloadLabel: "Download Sample CSV",
-          helperText: "A demo CSV you can download and upload into Koe Lab to try it out.",
-          github: "https://github.com/nanako1129-g/koelab",
-          impact: "Analyzed 1,888 responses in minutes",
-          impactNote: "Confidence score: 0.9-0.95",
-        },
-        {
-          title: "Government Document Buster",
-          reason:
-            "I heard a coworker was spending nearly an hour reading bid PDFs and copying them into spreadsheets. I wanted to fix that, and I was especially careful to attach source quotations to every field.",
-          description:
-            "Parses government tender PDFs and outputs required documents, deadlines, and evidence into a spreadsheet, with source quotations attached to every item to reduce hallucinations.",
-          category: "Document AI / Operational Efficiency",
-          accent: "from-[#fff0df] to-[#efe7ff]",
-          tech: ["GAS", "Gemini API", "Google Drive API"],
-          impact: "Reduced over 1 hour of work to about 1 minute",
-          impactNote: "Automatic source citation for every output item",
-        },
-        {
-          title: "Video Analysis Tool (Caption Change Detection)",
-          reason:
-            "A coworker was manually copying screenshot after screenshot from video editing timelines. It was overwhelming to watch, so I built this as my first Python product.",
-          description:
-            "Detects caption change points from uploaded videos and exports timestamped image lists, Excel files, PowerPoint files, and ZIP archives in one flow.",
-          category: "Video AI / Production Support",
-          accent: "from-[#ffe4d9] to-[#fff1cc]",
-          tech: [
-            "Python",
-            "OpenCV",
-            "Gradio",
-            "pandas",
-            "openpyxl",
-            "python-pptx",
-          ],
-          impact: "Cut 1 hour of screenshot work down to 5 minutes",
-          impactNote: "Generated multiple output formats at once",
-        },
-        {
-          title: "Video Caption Proofreading Tool",
-          reason:
-            "A coworker told me they were hitting the limit of proofreading captions by eye alone. I tried feeding the video into Gemini in Google AI Studio, and it started flagging issues with timestamps.",
-          description:
-            "Uploads YouTube videos and mp4 files to Gemini in Google AI Studio and detects caption typos, notation inconsistencies, and proper noun mistakes with timestamps.",
-          category: "Video AI / Quality Assurance",
-          accent: "from-[#dff8ee] to-[#fff0df]",
-          tech: ["Google AI Studio", "Gemini", "Prompt Engineering"],
-          impact: "Screened 10-minute videos in under 5 minutes",
-          impactNote: "Significantly reduced proofreading time",
-        },
-        {
-          title: "Care Study Support Cat Bot",
-          reason:
-            "A friend was working hard to balance caregiving work and study, and I wanted to cheer them on. So I built a personal bot that turns official learning materials into RAG and responds through an encouraging cat on LINE.",
-          description:
-            "A chatbot built to support a friend's caregiver training studies. It turns the official caregiver training PDF text into a RAG system and explains caregiving knowledge through a cat character on LINE.",
-          category: "Education AI / RAG",
-          accent: "from-[#e7f7ef] to-[#efe5ff]",
-          tech: ["n8n", "LINE API", "Gemini API", "RAG", "PDF Parsing"],
-          impact: "Supports self-study 24/7",
-          impactNote: "Reliability backed by RAG over official learning materials",
-          status: "Personal project / live",
-          topBadge: "Cat Friendly",
-          specialBadge: "Gentle cat guide",
-        },
-        {
-          title: "Contract Renewal Auto Checker",
-          reason:
-            "It came from HR worrying about missed contract renewals. I designed it so everything from registration to renewal could be completed inside Slack.",
-          description:
-            "Automatically monitors contractor renewal dates and sends Slack DMs to HR and team owners one month and two weeks in advance, all managed through Slack workflows.",
-          category: "Workflow Automation / HR Tech",
-          accent: "from-[#dcf7ef] to-[#e8f6ff]",
-          tech: ["GAS", "Slack API", "Slack Workflow Builder", "Google Sheets"],
-          impact: "Zero missed contract renewals",
-          impactNote: "Runs every morning at 9:00 AM",
-        },
-        {
-          title: "Slack Internal Consultation Flow",
-          reason:
-            "HR told me there needed to be a place where people could reach out anonymously. I designed the workflow around psychological safety.",
-          description:
-            "An anonymous consultation workflow on Slack that launches a form from a button, notifies three staff members by DM, and logs the case to Google Sheets.",
-          category: "Internal DX / HR Tech",
-          accent: "from-[#eaf8ff] to-[#eef3ff]",
-          tech: ["Slack Workflow Builder", "Google Sheets"],
-          impact: "Built in 10 to 15 minutes",
-          impactNote: "Quickly deployable anonymous consultation flow",
-        },
-        {
-          title: "Gemini Gem Proofreading Tool",
-          reason:
-            "My manager asked for a way to check three documents at once. I built it in response, and it has already been adopted internally.",
-          description:
-            "A proofreading tool built with Gemini Gem that checks three documents at once. It was developed at a manager's request and has already been introduced in practice.",
-          category: "Document AI / Operational Efficiency",
-          accent: "from-[#f3ecff] to-[#e8fff7]",
-          tech: ["Gemini Gem", "Prompt Design"],
-          impact: "Proofread 3 documents at the same time",
-          impactNote: "Parallelized multi-document review work",
-        },
-        {
-          title: "Sales Assist Tool (Auto Competitor PR Scan)",
-          reason:
-            "The sales team was manually researching competitor PR updates every time, so I wanted to automate that collection work.",
-          description:
-            "Collects competitor PR and tie-up information every two weeks, generates proposal drafts for a parenting-focused media business with Gemini, and sends the results to the sales team via Slack.",
-          category: "Sales Automation / Marketing",
-          accent: "from-[#e9e2ff] to-[#ffe7da]",
-          tech: ["GAS", "Gemini API", "Slack API", "Google Sheets"],
-          impact: "Automated proposal preparation",
-          impactNote: "Greatly reduced research time for the sales team",
-        },
-        {
-          title: "DateSuccess AI",
-          reason:
-            "At a hackathon, I heard a teammate's idea and mocked it up immediately with Gemini Canvas. We got from concept to presentation in 80 minutes.",
-          description:
-            "An AI concierge app prototyped through a hackathon. It reduces the cognitive load of venue selection and conversation prep, creating more room for people to focus on the time they share together.",
-          category: "Lifestyle AI / Hackathon MVP",
-          accent: "from-[#ffe8ef] to-[#efe7ff]",
-          tech: [
-            "React",
-            "Tailwind CSS",
-            "GAS",
-            "Gemini API",
-            "Hot Pepper API",
-            "Netlify",
-          ],
-          impact: "A hackathon MVP brought into working form quickly",
-          impactNote: "Validated with a low-cost serverless architecture",
-          topBadge: "Hackathon",
-          specialBadge: "Built during a hackathon",
-        },
-        {
-          title: "In-house GAS + AI Workshop",
-          reason:
-            "I wanted non-engineer colleagues to be able to use AI too, so I created training materials around the idea that AI can generate GAS code just from Japanese instructions.",
-          description:
-            "An internal training deck for non-engineers showing how to build a Google Forms auto-reply system by simply describing GAS code in Japanese to AI.",
-          category: "AI Education / Internal Training",
-          accent: "from-[#fff2e9] to-[#f0edff]",
-          tech: ["GAS", "Gemini", "ChatGPT"],
-          impact: "Non-engineers could learn automation in one day",
-          impactNote: "Used as a practical entry-level automation workshop",
-        },
-      ] satisfies Project[],
+      featuredBadge: "⭐ Featured",
+      featuredSectionTitle: "🌟 Featured Projects",
+      featuredSectionSubtitle: "Three pillars that define Meina's work",
+      categoryRailLabel: "Categories",
+      tabsListAriaLabel: "Filter projects by category",
+      tabs: projectTabsEn,
+      items: portfolioProjectsEn,
     },
     skills: {
       eyebrow: "Skills",
@@ -517,24 +221,39 @@ const siteContent = {
           items: [
             "Gemini API",
             "ChatGPT API",
-            "LLM app design",
-            "RAG implementation",
-            "Prompt design, evaluation, iteration",
             "Google AI Studio",
             "Genspark workflow use",
+            "LLM app design",
+            "Prompt design, evaluation, iteration",
+            "RAG",
             "Data analysis & visualization",
+            "Geospatial data analysis",
           ],
         },
         {
-          title: "Automation / Development",
+          title: "Web Development",
+          items: [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "Supabase",
+            "Vercel",
+            "Framer Motion / CSS Animation",
+          ],
+        },
+        {
+          title: "Automation / Workflow",
           items: [
             "Python",
             "Streamlit",
+            "folium",
             "Google Apps Script (GAS)",
             "n8n",
             "Slack API",
             "LINE API",
             "Google Sheets automation",
+            "VOICEVOX / Web Speech API",
           ],
         },
         {
@@ -543,9 +262,12 @@ const siteContent = {
             "New business planning & proposals",
             "ROI analysis",
             "AI workshop design & facilitation",
+            "Internal AI enablement & change support",
             "User interviews",
             "Requirement definition",
-            "Internal AI enablement & change support",
+            "PoC & MVP design",
+            "Clean architecture design",
+            "Multilingual UI design (i18n)",
           ],
         },
       ],
@@ -588,6 +310,150 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 },
 };
 
+type ProjectPortfolioLabels = {
+  impactLabel: string;
+  githubLabel: string;
+  featuredBadge: string;
+};
+
+function ProjectPortfolioCard({
+  project,
+  labels,
+  variant,
+}: {
+  project: PortfolioProject;
+  labels: ProjectPortfolioLabels;
+  variant: "featured" | "grid";
+}) {
+  const isFeatured = variant === "featured";
+  const headerHeight = isFeatured ? "h-32 sm:h-36" : "h-28";
+  const cardShell = isFeatured
+    ? "min-h-[28rem] border-[#d9cdfd] bg-[linear-gradient(180deg,_#fffdfd,_#fcf9ff)] p-6 shadow-[0_24px_70px_rgba(181,157,247,0.2)] sm:min-h-[30rem] sm:p-7"
+    : `min-h-[26rem] p-5 sm:min-h-[28rem] sm:p-6 ${
+        project.specialBadge
+          ? "border-[#f2d9ea] shadow-[0_18px_55px_rgba(236,181,210,0.18)]"
+          : "border-white"
+      }`;
+
+  return (
+    <motion.article
+      layout={false}
+      initial={false}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+      whileHover={{
+        y: -10,
+        boxShadow: "0 24px 70px rgba(148, 163, 184, 0.18)",
+      }}
+      className={`group block w-full max-w-full rounded-[2rem] border bg-white shadow-[0_14px_45px_rgba(148,163,184,0.12)] ${cardShell}`}
+    >
+      <div className={`relative ${headerHeight} rounded-[1.5rem] bg-gradient-to-br ${project.accent}`}>
+        {isFeatured ? (
+          <div className="absolute right-3 top-3 z-10 max-w-[min(100%,12rem)] rounded-full border border-[#eadfff] bg-[#fffdfd]/95 px-3 py-1 text-[10px] font-semibold tracking-wide text-[#6b4fd6] shadow-sm backdrop-blur sm:right-4 sm:top-4 sm:text-xs">
+            {labels.featuredBadge}
+          </div>
+        ) : null}
+        {project.topBadge ? (
+          <div
+            className={`absolute top-3 max-w-[calc(100%-1.5rem)] rounded-full bg-white/80 px-3 py-1 text-[10px] font-medium text-[#b86f94] backdrop-blur sm:top-4 sm:text-xs ${
+              isFeatured ? "left-3 sm:left-4" : "right-3 sm:right-4"
+            }`}
+          >
+            {project.topBadge}
+          </div>
+        ) : null}
+      </div>
+      <div className="mt-5 w-full max-w-full overflow-visible sm:mt-6">
+        <div className="flex w-full flex-wrap items-start gap-2">
+          <span className="inline-flex max-w-full whitespace-normal break-words rounded-full bg-slate-100 px-3 py-1 text-xs font-medium leading-5 text-slate-500">
+            {project.category}
+          </span>
+          {project.specialBadge ? (
+            <span className="inline-flex max-w-full whitespace-normal break-words rounded-full bg-[#fff1f7] px-3 py-1 text-xs font-medium leading-5 text-[#b86f94]">
+              {project.specialBadge}
+            </span>
+          ) : null}
+        </div>
+        <h3
+          className={`mt-4 break-words font-semibold text-slate-800 ${
+            isFeatured ? "text-xl sm:text-2xl md:text-[1.65rem]" : "text-xl sm:text-2xl"
+          }`}
+        >
+          {project.title}
+        </h3>
+        {project.reason ? (
+          <p className="mt-3 break-words text-xs leading-6 text-slate-500 sm:text-sm sm:leading-7">
+            {project.reason}
+          </p>
+        ) : null}
+        <p className="mt-4 break-words text-sm leading-7 text-slate-600">{project.description}</p>
+        <div className="mt-5 w-full max-w-full rounded-[1.5rem] bg-[#faf7ff] p-4">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#8e78db]">{labels.impactLabel}</p>
+          <p
+            className={`mt-2 whitespace-normal break-words font-semibold leading-7 text-slate-800 ${
+              isFeatured ? "text-lg sm:text-xl md:text-2xl" : "text-lg sm:text-xl"
+            }`}
+          >
+            {project.impact}
+          </p>
+          <p className="mt-1 whitespace-normal break-words text-sm leading-6 text-slate-500">{project.impactNote}</p>
+        </div>
+        <div className="mt-5 flex w-full flex-wrap items-start gap-2">
+          {project.tech.map((item) => (
+            <span
+              key={item}
+              className="inline-flex max-w-full whitespace-normal break-words rounded-full bg-[#f7f7fb] px-3 py-1 text-xs leading-5 text-slate-500"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6 flex w-full flex-col gap-3 overflow-visible sm:mt-8 sm:flex-row sm:flex-wrap">
+        {project.href ? (
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center rounded-full bg-[#f4efff] px-4 py-2 text-sm font-medium text-[#7c61d6] transition group-hover:bg-[#ede5ff] sm:w-auto"
+          >
+            {project.linkLabel}
+          </a>
+        ) : null}
+        {project.downloadHref ? (
+          <a
+            href={project.downloadHref}
+            download
+            className="inline-flex w-full items-center justify-center rounded-full border border-[#d8cef8] bg-[#faf6ff] px-4 py-2 text-sm font-medium text-[#7c61d6] transition hover:bg-[#f2eaff] sm:w-auto"
+          >
+            {project.downloadLabel}
+          </a>
+        ) : null}
+        {project.github ? (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 sm:w-auto"
+          >
+            {labels.githubLabel}
+          </a>
+        ) : null}
+        {project.status ? (
+          <span className="inline-flex w-full items-center justify-center rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-500 sm:w-auto">
+            {project.status}
+          </span>
+        ) : null}
+      </div>
+      {project.helperText ? (
+        <p className="mt-3 break-words text-xs leading-6 text-slate-500">{project.helperText}</p>
+      ) : null}
+    </motion.article>
+  );
+}
+
 type FadeInSectionProps = {
   children: React.ReactNode;
   className?: string;
@@ -612,7 +478,31 @@ function FadeInSection({ children, className = "", id }: FadeInSectionProps) {
 
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("ja");
+  const [projectTab, setProjectTab] = useState<ProjectFilter>("all");
   const content = siteContent[locale];
+
+  const portfolioLabels: ProjectPortfolioLabels = {
+    impactLabel: content.projects.impactLabel,
+    githubLabel: content.projects.githubLabel,
+    featuredBadge: content.projects.featuredBadge,
+  };
+
+  const featuredProjects = useMemo(() => {
+    return featuredProjectIds
+      .map((id) => content.projects.items.find((p) => p.id === id))
+      .filter((p): p is PortfolioProject => Boolean(p));
+  }, [content.projects.items]);
+
+  const filteredProjects = useMemo(() => {
+    const items = content.projects.items;
+    const filtered =
+      projectTab === "all" ? [...items] : items.filter((p) => p.filterCategory === projectTab);
+    const orderMap = new Map<string, number>(
+      portfolioProjectDisplayOrder.map((id, index) => [id, index]),
+    );
+    filtered.sort((a, b) => (orderMap.get(a.id) ?? 999) - (orderMap.get(b.id) ?? 999));
+    return filtered;
+  }, [content.projects.items, projectTab]);
 
   return (
     <div className="min-h-screen bg-white text-slate-700">
@@ -781,7 +671,7 @@ export default function Home() {
             </div>
           </FadeInSection>
 
-          <FadeInSection id="projects" className="w-full space-y-8">
+          <FadeInSection id="projects" className="w-full space-y-10 sm:space-y-12">
             <div className="w-full max-w-2xl">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#ef9b73]">
                 {content.projects.eyebrow}
@@ -791,129 +681,79 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {content.projects.items.map((project, index) => (
-                <motion.article
-                  key={project.title}
-                  initial={false}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.01 }}
-                  transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
-                  whileHover={{
-                    y: -10,
-                    boxShadow: "0 24px 70px rgba(148, 163, 184, 0.18)",
-                  }}
-                  className={`group block w-full max-w-full min-h-[26rem] rounded-[2rem] border bg-white p-5 shadow-[0_14px_45px_rgba(148,163,184,0.12)] sm:min-h-[28rem] sm:p-6 ${
-                    index < 3
-                      ? "border-[#d9cdfd] bg-[linear-gradient(180deg,_#fffdfd,_#fcf9ff)] shadow-[0_20px_60px_rgba(181,157,247,0.16)]"
-                      : project.specialBadge
-                        ? "border-[#f2d9ea] shadow-[0_18px_55px_rgba(236,181,210,0.18)]"
-                        : "border-white"
-                  }`}
-                >
-                  <div
-                    className={`relative h-28 rounded-[1.5rem] bg-gradient-to-br ${project.accent}`}
-                  >
-                    {index < 3 ? (
-                      <div className="absolute left-3 top-3 rounded-full bg-[#f3ecff] px-3 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#7c61d6] sm:left-4 sm:top-4 sm:text-xs">
-                        Featured
-                      </div>
-                    ) : null}
-                    {project.topBadge ? (
-                      <div className="absolute right-3 top-3 max-w-[calc(100%-1.5rem)] rounded-full bg-white/80 px-3 py-1 text-[10px] font-medium text-[#b86f94] backdrop-blur sm:right-4 sm:top-4 sm:text-xs">
-                        {project.topBadge}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="mt-5 w-full max-w-full overflow-visible sm:mt-6">
-                    <div className="flex w-full flex-wrap items-start gap-2">
-                      <span className="inline-flex max-w-full whitespace-normal break-words rounded-full bg-slate-100 px-3 py-1 text-xs font-medium leading-5 text-slate-500">
-                        {project.category}
-                      </span>
-                      {project.specialBadge ? (
-                        <span className="inline-flex max-w-full whitespace-normal break-words rounded-full bg-[#fff1f7] px-3 py-1 text-xs font-medium leading-5 text-[#b86f94]">
-                          {project.specialBadge}
-                        </span>
-                      ) : null}
-                    </div>
-                    <h3 className="mt-4 break-words text-xl font-semibold text-slate-800 sm:text-2xl">
-                      {project.title}
-                    </h3>
-                    {project.reason ? (
-                      <p className="mt-3 break-words text-xs leading-6 text-slate-500 sm:text-sm sm:leading-7">
-                        {project.reason}
-                      </p>
-                    ) : null}
-                    <p className="mt-4 break-words text-sm leading-7 text-slate-600">
-                      {project.description}
-                    </p>
-                    <div className="mt-5 w-full max-w-full rounded-[1.5rem] bg-[#faf7ff] p-4">
-                      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#8e78db]">
-                        {content.projects.impactLabel}
-                      </p>
-                      <p className="mt-2 whitespace-normal break-words text-lg font-semibold leading-7 text-slate-800 sm:text-xl">
-                        {project.impact}
-                      </p>
-                      <p className="mt-1 whitespace-normal break-words text-sm leading-6 text-slate-500">
-                        {project.impactNote}
-                      </p>
-                    </div>
-                    <div className="mt-5 flex w-full flex-wrap items-start gap-2">
-                      {project.tech.map((item) => (
-                        <span
-                          key={item}
-                          className="inline-flex max-w-full whitespace-normal break-words rounded-full bg-[#f7f7fb] px-3 py-1 text-xs leading-5 text-slate-500"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-6 flex w-full flex-col gap-3 overflow-visible sm:mt-8 sm:flex-row sm:flex-wrap">
-                    {project.href ? (
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center rounded-full bg-[#f4efff] px-4 py-2 text-sm font-medium text-[#7c61d6] transition group-hover:bg-[#ede5ff] sm:w-auto"
-                      >
-                        {project.linkLabel}
-                      </a>
-                    ) : null}
-                    {project.downloadHref ? (
-                      <a
-                        href={project.downloadHref}
-                        download
-                        className="inline-flex w-full items-center justify-center rounded-full border border-[#d8cef8] bg-[#faf6ff] px-4 py-2 text-sm font-medium text-[#7c61d6] transition hover:bg-[#f2eaff] sm:w-auto"
-                      >
-                        {project.downloadLabel}
-                      </a>
-                    ) : null}
-                    {project.github ? (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 sm:w-auto"
-                      >
-                        {content.projects.githubLabel}
-                      </a>
-                    ) : null}
-                    {project.status ? (
-                      <span className="inline-flex w-full items-center justify-center rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-500 sm:w-auto">
-                        {project.status}
-                      </span>
-                    ) : null}
-                  </div>
-                  {project.helperText ? (
-                    <p className="mt-3 break-words text-xs leading-6 text-slate-500">
-                      {project.helperText}
-                    </p>
-                  ) : null}
-                </motion.article>
-              ))}
+            <div className="space-y-5">
+              <div className="max-w-2xl space-y-2">
+                <p className="text-sm font-semibold tracking-tight text-slate-800 sm:text-base">
+                  {content.projects.featuredSectionTitle}
+                </p>
+                <p className="text-xs leading-relaxed text-slate-500 sm:text-sm">
+                  {content.projects.featuredSectionSubtitle}
+                </p>
+              </div>
+              <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-3">
+                {featuredProjects.map((project) => (
+                  <ProjectPortfolioCard
+                    key={project.id}
+                    project={project}
+                    labels={portfolioLabels}
+                    variant="featured"
+                  />
+                ))}
+              </div>
             </div>
+
+            <div className="space-y-4">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
+                {content.projects.categoryRailLabel}
+              </p>
+              <div
+                className="-mx-1 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                role="tablist"
+                aria-label={content.projects.tabsListAriaLabel}
+              >
+                <div className="flex w-max min-w-full gap-2 px-1 sm:flex-wrap sm:gap-2.5">
+                  {content.projects.tabs.map((tab) => {
+                    const active = projectTab === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        role="tab"
+                        aria-selected={active}
+                        onClick={() => setProjectTab(tab.id)}
+                        className={`shrink-0 rounded-full border px-4 py-2 text-xs font-medium transition sm:text-sm ${
+                          active
+                            ? "border-[#cfbcff] bg-[#ede5ff] text-[#5b3fb8] shadow-[0_8px_22px_rgba(181,157,247,0.22)]"
+                            : "border-transparent bg-[#f8f9fb] text-slate-600 hover:border-[#e5e7eb] hover:bg-[#f4efff]/80"
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={projectTab}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.28, ease: "easeOut" }}
+                className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
+              >
+                {filteredProjects.map((project) => (
+                  <ProjectPortfolioCard
+                    key={project.id}
+                    project={project}
+                    labels={portfolioLabels}
+                    variant="grid"
+                  />
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </FadeInSection>
 
           <FadeInSection id="skills" className="space-y-8">
@@ -926,7 +766,7 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {content.skills.groups.map((group) => (
                 <motion.div
                   key={group.title}
